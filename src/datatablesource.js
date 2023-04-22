@@ -1,35 +1,26 @@
 export const userColumns = [
-  { field: "id", headerName: "ID", width: 70 },
+  { field: "title", headerName: "TITLE", width: 90 },
   {
-    field: "user",
-    headerName: "User",
+    field: "note",
+    headerName: "NOTES",
     width: 230,
-    renderCell: (params) => {
-      return (
-        <div className=" d-flex   ">
-          <img
-            className=" img-fluid rounded-circle"
-            style={{ width: "32px", height: "32px" }}
-            src={params.row.img}
-            alt="avatar"
-          />
-          <p className=" my-auto ml-2 font-weight-bold text-secondary">
-            {params.row.username}
-          </p>
-        </div>
-      );
-    },
+    // renderCell: (params) => {
+    //   return (
+    //     <div className=" d-flex   ">
+    //       <img
+    //         className=" img-fluid rounded-circle"
+    //         style={{ width: "32px", height: "32px" }}
+    //         src={params.row.img}
+    //         alt="avatar"
+    //       />
+    //       <p className=" my-auto ml-2 font-weight-bold text-secondary">
+    //         {params.row.username}
+    //       </p>
+    //     </div>
+    //   );
+    // },
   },
-  {
-    field: "email",
-    headerName: "Email",
-    width: 230,
-  },
-  {
-    field: "age",
-    headerName: "Age",
-    width: 100,
-  },
+
   {
     field: "status",
     headerName: "Status",

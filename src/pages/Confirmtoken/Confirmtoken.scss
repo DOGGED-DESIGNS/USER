@@ -18,16 +18,10 @@ $secondary: #f9f6fb;
     rgba(147, 39, 91, 1) 100%
   );
   &__form {
-    max-width: 350px;
+    width: 350px;
     height: auto;
     padding: 15px;
     background: $secondary;
     border-radius: 8px;
-    @media (max-width: 400px) {
-      max-width: 300px;
-    }
-    @media (max-width: 300px) {
-      max-width: 250px;
-    }
   }
 }

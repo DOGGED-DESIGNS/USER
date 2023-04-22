@@ -1,0 +1,27 @@
+.color {
+  color: #039103;
+  color: #c8fec8;
+  // second
+  color: #910303;
+  color: #fec8c8;
+  // third
+  color: #0a0391;
+  color: #cbc8fe;
+  // foruth
+  color: #7c0391;
+  color: #f6c8fe;
+  // fifth
+  color: #037991;
+  color: #c8f5fe;
+  // sixth
+  color: #0d4e87;
+  color: #cce4fa;
+  // seventh
+  color: #03915b;
+  color: #c8fee9;
+}
+.contzz {
+  &::-webkit-scrollbar {
+    width: 0px !important;
+  }
+}

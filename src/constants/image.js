@@ -10,4 +10,5 @@ import Secondbanner from "../assets/secondbanner2logopng.svg";
 
 export default {
   Logo,
+  url: "http://localhost/api",
 };

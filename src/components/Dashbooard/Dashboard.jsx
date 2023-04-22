@@ -1,14 +1,75 @@
-import { People } from "@mui/icons-material";
+import {
+  DeleteForeverOutlined,
+  DescriptionOutlined,
+  FeedbackOutlined,
+  GroupOutlined,
+  NotificationsActiveOutlined,
+  People,
+  PeopleOutline,
+  VerifiedUserOutlined,
+} from "@mui/icons-material";
 import { Typography } from "@mui/joy";
 import { IconButton } from "@mui/material";
 import { height } from "@mui/system";
-import React from "react";
+import { useEffect, useState } from "react";
 import "../../App.css";
 import Piez from "../PIe/Pie";
+import Adminz from "../../hooks/Admin";
+import { useDeferredValue } from "react";
+import { Globaladmin } from "../../context/Adminlogincontext";
+import "./Dashboard.scss";
 const Dashboard = () => {
+  const { admindraw } = Adminz();
+
+  const {
+    admin,
+    setAdminerror,
+    hits,
+    setHits,
+    verifiedusers,
+    setVerifiedusers,
+    adminerror,
+    loginload,
+    setLoginload,
+    dispatch,
+    users,
+    setUsers,
+    setFeedback,
+    setNotification,
+    setVerifycount,
+    setGendercount,
+    setUsersnotes,
+    setDeletedusers,
+    setUnverifiedusers,
+    feedback,
+    notification,
+    verifycount,
+    gendercount,
+    usersnotes,
+    deletedusers,
+    unverifiedusers,
+
+    drawload,
+    setDrawload,
+  } = Globaladmin();
+
+  const [vc, setVc] = useState([]);
+  const [gc, setGc] = useState([]);
+
+  const changevc = (val) => {
+    setVc(val);
+  };
+  const changegc = (val) => {
+    setGc(val);
+  };
+
+  useEffect(() => {
+    admindraw();
+  }, []);
+
   return (
     <div
-      className=" p-3 border"
+      className=" contzz container p-3"
       style={{ height: "100vh", overflowX: "scroll" }}
     >
       <div className="row">
@@ -28,16 +89,16 @@ const Dashboard = () => {
               className=" d-flex  align-items-center "
             >
               <div
-                style={{ background: "#c7ffc7" }}
+                style={{ background: "#fec8c8" }}
                 className="p-2 rounded-circle"
               >
                 <IconButton>
-                  <People sx={{ color: "#039103" }} />
+                  <PeopleOutline sx={{ color: "#910303" }} />
                 </IconButton>
               </div>
               <div>
-                <Typography level="h5">1212</Typography>
-                <Typography level="body1">Total Users</Typography>
+                <Typography level="h5">{hits[0]?.hits}</Typography>
+                <Typography level="body1">Total Visitors</Typography>
               </div>
             </div>
           </div>
@@ -62,11 +123,11 @@ const Dashboard = () => {
                 className="p-2 rounded-circle"
               >
                 <IconButton>
-                  <People sx={{ color: "#039103" }} />
+                  <GroupOutlined sx={{ color: "#039103" }} />
                 </IconButton>
               </div>
               <div>
-                <Typography level="h5">1212</Typography>
+                <Typography level="h5">{users.length} </Typography>
                 <Typography level="body1">Total Users</Typography>
               </div>
             </div>
@@ -88,16 +149,16 @@ const Dashboard = () => {
               className=" d-flex  align-items-center "
             >
               <div
-                style={{ background: "#c7ffc7" }}
+                style={{ background: "#cbc8fe" }}
                 className="p-2 rounded-circle"
               >
                 <IconButton>
-                  <People sx={{ color: "#039103" }} />
+                  <FeedbackOutlined sx={{ color: "#0a0391" }} />
                 </IconButton>
               </div>
               <div>
-                <Typography level="h5">1212</Typography>
-                <Typography level="body1">Total Users</Typography>
+                <Typography level="h5"> {feedback.length} </Typography>
+                <Typography level="body1">Total Feedbacks</Typography>
               </div>
             </div>
           </div>
@@ -118,16 +179,16 @@ const Dashboard = () => {
               className=" d-flex  align-items-center "
             >
               <div
-                style={{ background: "#66ff66" }}
+                style={{ background: "#f6c8fe" }}
                 className="p-2 rounded-circle"
               >
                 <IconButton>
-                  <People sx={{ color: "#039103" }} />
+                  <NotificationsActiveOutlined sx={{ color: "#7c0391" }} />
                 </IconButton>
               </div>
               <div>
-                <Typography level="h5">1212</Typography>
-                <Typography level="body1">Total Users</Typography>
+                <Typography level="h5"> {notification.length} </Typography>
+                <Typography level="body1">Admin Notification</Typography>
               </div>
             </div>
           </div>
@@ -152,16 +213,16 @@ const Dashboard = () => {
               className=" d-flex  align-items-center "
             >
               <div
-                style={{ background: "#c7ffc7" }}
+                style={{ background: "#c8f5fe" }}
                 className="p-2 rounded-circle"
               >
                 <IconButton>
-                  <People sx={{ color: "#039103" }} />
+                  <DeleteForeverOutlined sx={{ color: "#037991" }} />
                 </IconButton>
               </div>
               <div>
-                <Typography level="h5">1212</Typography>
-                <Typography level="body1">Total Users</Typography>
+                <Typography level="h5"> {deletedusers.length} </Typography>
+                <Typography level="body1">Deleted Users</Typography>
               </div>
             </div>
           </div>
@@ -182,16 +243,16 @@ const Dashboard = () => {
               className=" d-flex  align-items-center "
             >
               <div
-                style={{ background: "#c7ffc7" }}
+                style={{ background: "#cce4fa" }}
                 className="p-2 rounded-circle"
               >
                 <IconButton>
-                  <People sx={{ color: "#039103" }} />
+                  <DescriptionOutlined sx={{ color: "#0d4e87" }} />
                 </IconButton>
               </div>
               <div>
-                <Typography level="h5">1212</Typography>
-                <Typography level="body1">Total Users</Typography>
+                <Typography level="h5"> {usersnotes.length} </Typography>
+                <Typography level="body1">Total Notes</Typography>
               </div>
             </div>
           </div>
@@ -212,30 +273,63 @@ const Dashboard = () => {
               className=" d-flex  align-items-center "
             >
               <div
-                style={{ background: "#66ff66" }}
+                style={{ background: "#c8fee9" }}
                 className="p-2 rounded-circle"
               >
                 <IconButton>
-                  <People sx={{ color: "#039103" }} />
+                  <VerifiedUserOutlined sx={{ color: "#03915b" }} />
                 </IconButton>
               </div>
               <div>
-                <Typography level="h5">1212</Typography>
-                <Typography level="body1">Total Users</Typography>
+                <Typography level="h5"> {verifiedusers.length} </Typography>
+                <Typography level="body1">Verfied Users</Typography>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <div className=" row">
-        <div className="col-lg-6 col-md-6 col-sm-12">
-          <div className="m-auto" style={{ width: "400px", height: "400px" }}>
-            <Piez />
+        <div className=" py-3  col-lg-6 col-md-6 col-sm-12">
+          <div
+            className="m-auto borde   shadow-sm "
+            style={{
+              width: "400px",
+              borderRadius: "4px",
+              overflow: "hidden",
+              height: "400px",
+            }}
+          >
+            <Typography
+              level="h4"
+              sx={{ background: "#051E34" }}
+              className=" text-white-50 d-block text-center text-capitalize"
+            >
+              {" "}
+              Gender{" "}
+            </Typography>
+            <Piez data={gendercount} />
           </div>
         </div>
-        <div className="col-lg-6 col-md-6 col-sm-12">
-          <div className="m-auto" style={{ width: "400px", height: "400px" }}>
-            <Piez />
+        <div className=" py-3 col-lg-6 col-md-6 col-sm-12">
+          <div
+            className="m-auto  my-3 shadow-sm "
+            style={{
+              width: "400px",
+              borderRadius: "4px",
+              overflow: "hidden",
+              height: "400px",
+            }}
+          >
+            <Typography
+              level="h4"
+              sx={{ background: "#051E34" }}
+              className=" text-white-50 d-block text-center text-capitalize"
+            >
+              {" "}
+              Verified Users{" "}
+            </Typography>
+            <Piez data={verifycount} />
           </div>
         </div>
       </div>

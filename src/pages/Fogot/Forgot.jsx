@@ -2,6 +2,9 @@ import { useState } from "react";
 import "./Forgot.scss";
 import "../../App.css";
 import {
+  Alert,
+  CircularProgress,
+  Collapse,
   IconButton,
   InputAdornment,
   OutlinedInput,
@@ -14,6 +17,7 @@ import { Button, Typography, TextField } from "@mui/material";
 import {
   AccountCircle,
   ArrowBack,
+  Close,
   Email,
   EmailOutlined,
   LockClockOutlined,
@@ -26,9 +30,33 @@ import {
   VisibilityOutlined,
 } from "@mui/icons-material";
 import { NavLink } from "react-router-dom";
+import Useallcontext from "../../hooks/Useallcontext";
+import Signupz from "../../hooks/Signup";
+import Errormessage from "../../components/Errormessage";
 
 const Forgot = () => {
+  const { verify, errormessage, sentmessage, setSentmessage } = Signupz();
+  const { loadlogin, setLoadlogin, errorlogin, setErrorlogin } =
+    Useallcontext();
+  const [email, setEmail] = useState("");
+  const [confirm, setConfirm] = useState(false);
+
   const [visible, setVisible] = useState(false);
+  const [verifymail, setVerifymail] = useState(false);
+  const [error, setError] = useState(false);
+
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const handleSubmit = () => {
+    // check if input is an empty field
+    setError(false);
+    if (email === "" || verifymail) {
+      setError(true);
+    } else {
+      setError(false);
+      verify(email);
+      setConfirm(true);
+    }
+  };
 
   const CustomBtn = styled(Button)({
     background: "#005a34",
@@ -65,20 +93,70 @@ const Forgot = () => {
           Verify Your Email
         </Typography>
 
+        <Collapse in={error}>
+          <Alert
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setError(false);
+                }}
+              >
+                <Close fontSize="small" />
+              </IconButton>
+            }
+            severity={"error"}
+          >
+            please fill all form fields
+          </Alert>
+        </Collapse>
+
+        <Collapse in={sentmessage?.message}>
+          <Alert
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setSentmessage({});
+                }}
+              >
+                <Close fontSize="small" />
+              </IconButton>
+            }
+            severity={sentmessage.type}
+          >
+            {sentmessage.message}
+          </Alert>
+        </Collapse>
+
         <TextField
           sx={{
             width: "100%",
           }}
           size="small"
-          type={"text"}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            if (emailRegex.test(email)) {
+              setVerifymail(false);
+            } else {
+              setVerifymail(true);
+            }
+          }}
+          error={verifymail}
+          helperText={verifymail ? "invalid email" : ""}
+          type={"email"}
           className="my-2"
           variant="outlined"
-          placeholder="username"
+          placeholder="Email"
           id="input-with-icon-textfield"
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <EmailOutlined fontSize="small" />
+                <Email fontSize="small" />
               </InputAdornment>
             ),
           }}
@@ -105,8 +183,18 @@ const Forgot = () => {
         /> */}
 
         <div className="  mt-4 ">
-          <CustomBtn className=" my-1" endIcon={<Send />} variant="contained">
-            Submit
+          <CustomBtn
+            disabled={verifymail ? true : false}
+            onClick={handleSubmit}
+            className=" my-1"
+            endIcon={<Send />}
+            variant="contained"
+          >
+            {loadlogin ? (
+              <CircularProgress sx={{ color: "white" }} size={"1rem"} />
+            ) : (
+              "Verify"
+            )}
           </CustomBtn>
         </div>
       </div>
