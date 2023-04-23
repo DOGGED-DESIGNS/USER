@@ -53,20 +53,16 @@ const Adminlogin = () => {
           },
         }
       );
-      dispatch({ type: "LOGIN", payload: data.data.token });
-
-      localStorage.setItem("admin", data.data.token);
-
-      console.log(admin);
-      console.log(data.data);
-
-      setLoginload(false);
-    } catch (err) {
-      setLoginmessage(err.response.data);
-
-      console.log(err.response.data);
-      setLoginload(false);
-    }
+      if (data.data.error) {
+        setLoginmessage(data.data);
+        console.log(data.data);
+        setLoginload(false);
+      } else {
+        dispatch({ type: "LOGIN", payload: data.data.token });
+        localStorage.setItem("admin", data.data.token);
+        setLoginload(false);
+      }
+    } catch (err) {}
   };
 
   // reply
