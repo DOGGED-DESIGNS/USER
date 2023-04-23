@@ -10,6 +10,6 @@ import Secondbanner from "../assets/secondbanner2logopng.svg";
 
 export default {
   Logo,
-  url: "http://www.jeffreymatthewpatten.com/apii",
+  url: "https://www.jeffreymatthewpatten.com/apii",
   // url: "http://localhost/api/",
 };
