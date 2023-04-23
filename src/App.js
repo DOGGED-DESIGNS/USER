@@ -50,11 +50,11 @@ const App = () => {
               index
               element={
                 login.auth.token ? (
-                  <Navigate to={"/home"} />
-                ) : (
                   <>
-                    <Login />
+                    <Navigate to={"/home"} />
                   </>
+                ) : (
+                  <Login />
                 )
               }
             />
@@ -62,11 +62,11 @@ const App = () => {
               path="signup"
               element={
                 login.auth.token ? (
-                  <Navigate to={"/home"} />
-                ) : (
                   <>
-                    <Signup />
+                    <Navigate to={"/"} />
                   </>
+                ) : (
+                  <Signup />
                 )
               }
             />
@@ -74,11 +74,11 @@ const App = () => {
               path="forgot"
               element={
                 login.auth.token ? (
-                  <Navigate to={"/home"} />
-                ) : (
                   <>
-                    <Forgot />
+                    <Navigate to={"/home"} />
                   </>
+                ) : (
+                  <Forgot />
                 )
               }
             />

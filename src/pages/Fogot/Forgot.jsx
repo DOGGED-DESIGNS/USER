@@ -127,9 +127,9 @@ const Forgot = () => {
                 <Close fontSize="small" />
               </IconButton>
             }
-            severity={sentmessage.type}
+            severity={sentmessage?.type}
           >
-            {sentmessage.message}
+            {sentmessage?.message}
           </Alert>
         </Collapse>
 

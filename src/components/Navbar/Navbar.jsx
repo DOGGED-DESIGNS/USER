@@ -135,7 +135,7 @@ const Navbar = () => {
           </Snackbar>
         )}
         <Dialog open={openz}>
-          {users[0].verify == 0 ? (
+          {users[0]?.verify == 0 ? (
             <>
               <DialogTitle className=" text-danger my-2 text-capitalize my-3">
                 Please Verify your Email Address Inorder For you to send

@@ -40,11 +40,18 @@ const Login = () => {
   // this is the login hook
   const { login, errorlogin, setErrorlogin, loadlogin, setLoadlogin } =
     Useallcontext();
-  const { loginUsers, errormessage } = Loginhook();
+  const { loginUsers, errormessage, setErrormessage } = Loginhook();
 
   useEffect(() => {
     setErrorlogin(false);
   }, []);
+
+  if (!loadlogin) {
+    console.log(errormessage);
+    console.log("it is done loading");
+    console.log(login.auth.token);
+    console.log(errorlogin);
+  }
 
   // email regex
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -93,12 +100,12 @@ const Login = () => {
 
   // handlesubmit
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     setErrorlogin(false);
     if (password !== "" && email !== "") {
       if (!passwordveri && !emailveri) {
         setError(false);
-        loginUsers(email, password);
+        await loginUsers(email, password);
         setOpen(true);
       }
     } else {

@@ -188,9 +188,7 @@ const Adminz = () => {
       setUsersnotes(usersnotes.data);
       //
       setDrawload(false);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   return { admindraw };

@@ -115,15 +115,14 @@ const Adminlogin = () => {
           },
         }
       );
-
-      setReplymessage(data.data);
-      console.log(data.data);
-      setLoginload(false);
-    } catch (err) {
-      setReplymessage(err.response.data);
-      console.log(err?.response?.data);
-      setLoginload(false);
-    }
+      if (data.data.error) {
+        setReplymessage(data.data);
+        setLoginload(false);
+      } else {
+        setReplymessage(data.data);
+        setLoginload(false);
+      }
+    } catch (err) {}
   };
 
   // restore users;
@@ -193,15 +192,15 @@ const Adminlogin = () => {
           "Content-Type": "application/json",
         },
       });
-
-      setReplymessage(data.data);
-      console.log(data.data);
-      setLoginload(false);
-    } catch (err) {
-      setReplymessage(err.response.data);
-      console.log(err);
-      setLoginload(false);
-    }
+      if (data.data.error) {
+        setReplymessage(data.data);
+        setLoginload(false);
+      } else {
+        setReplymessage(data.data);
+        console.log(data.data);
+        setLoginload(false);
+      }
+    } catch (err) {}
   };
   const forgortpassword = async (email, password) => {
     setLoginload(true);
@@ -218,14 +217,15 @@ const Adminlogin = () => {
           },
         }
       );
-
-      setForgotchange(data.data);
-      console.log(data.data);
-      setLoginload(false);
-    } catch (err) {
-      setForgotchange(err.response.data);
-      setLoginload(false);
-    }
+      if (data.data.error) {
+        setForgotchange(data.data);
+        setLoginload(false);
+      } else {
+        setForgotchange(data.data);
+        console.log(data.data);
+        setLoginload(false);
+      }
+    } catch (err) {}
   };
 
   return {

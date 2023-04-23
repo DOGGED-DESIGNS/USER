@@ -37,10 +37,6 @@ const Logincontext = (prop) => {
   const [users, setUsers] = useState([]);
   const [login, dispatch] = useReducer(loginReducer, {
     auth: { token: tokenCheck() },
-    note: [],
-    notification: [],
-    users: {},
-    single: {},
   });
 
   // filter the note

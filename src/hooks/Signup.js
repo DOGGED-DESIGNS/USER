@@ -45,16 +45,19 @@ const Signupz = () => {
         }
       );
 
-      dispatch({ type: "LOGIN", payload: data.data.token });
-      localStorage.removeItem("token");
-      localStorage.setItem("token", data.data.token);
-      setLoadlogin(false);
-    } catch (err) {
-      setLoadlogin(false);
-      setErrorlogin(true);
-      setErrormessage(err?.response?.data?.message);
-    }
+      if (data.data.error) {
+        setLoadlogin(false);
+        setErrorlogin(true);
+        setErrormessage(data.data.message);
+      } else {
+        dispatch({ type: "LOGIN", payload: data.data.token });
+        localStorage.removeItem("token");
+        localStorage.setItem("token", data.data.token);
+        setLoadlogin(false);
+      }
+    } catch (err) {}
   };
+
   const verify = async (email) => {
     setLoadlogin(true);
     try {
@@ -67,15 +70,21 @@ const Signupz = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      setLoadlogin(false);
-      setErrorlogin(false);
-      setSentmessage(data.data);
-    } catch (err) {
-      setLoadlogin(false);
-      setErrorlogin(true);
-      setSentmessage(err?.response?.data);
-    }
+
+      if (data.data.error) {
+        setLoadlogin(false);
+        setErrorlogin(true);
+        setSentmessage(data.data);
+      } else {
+        setLoadlogin(false);
+        setErrorlogin(false);
+        setSentmessage(data.data);
+        console.log(data.data);
+      }
+    } catch (err) {}
   };
+
+  // update
   const update = async (form) => {
     setLoadlogin(true);
     try {
@@ -85,16 +94,17 @@ const Signupz = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      setLoadlogin(false);
-      setErrorlogin(false);
-      setSentmessage(data.data);
-      console.log(data);
-    } catch (err) {
-      setLoadlogin(false);
-      setErrorlogin(true);
-      setSentmessage(err?.response?.data);
-      console.log(err);
-    }
+
+      if (data.data.error) {
+        setLoadlogin(false);
+        setErrorlogin(true);
+        setSentmessage(data.data);
+      } else {
+        setLoadlogin(false);
+        setErrorlogin(false);
+        setSentmessage(data.data);
+      }
+    } catch (err) {}
   };
   const changePass = async (email, oldpassword, newpassword) => {
     setLoadlogin(true);
@@ -112,16 +122,16 @@ const Signupz = () => {
           },
         }
       );
-      setLoadlogin(false);
-      setErrorlogin(false);
-      setSentpass(data.data);
-      console.log(data);
-    } catch (err) {
-      setLoadlogin(false);
-      setErrorlogin(true);
-      setSentpass(err?.response?.data);
-      console.log(err);
-    }
+      if (data.data.error) {
+        setLoadlogin(false);
+        setErrorlogin(true);
+        setSentpass(data.data);
+      } else {
+        setLoadlogin(false);
+        setErrorlogin(false);
+        setSentpass(data.data);
+      }
+    } catch (err) {}
   };
 
   // draw one note
@@ -141,13 +151,15 @@ const Signupz = () => {
           },
         }
       );
-      setLoadlogin(false);
-      setSinglenote(data.data);
-      console.log(data.data);
-    } catch (err) {
-      setLoadlogin(true);
-      console.log("there was an error");
-    }
+      if (data.data.error) {
+        setLoadlogin(true);
+        console.log("there was an error");
+      } else {
+        setLoadlogin(false);
+        setSinglenote(data.data);
+        console.log(data.data);
+      }
+    } catch (err) {}
   };
   // delete one note
   const deleteone = async (noteid) => {
@@ -166,7 +178,6 @@ const Signupz = () => {
           },
         }
       );
-
       setLoadlogin(false);
       setSentdelete(data.data);
       console.log(data.data);
@@ -179,7 +190,6 @@ const Signupz = () => {
   // deleteing notification
   const deletenotification = async (id) => {
     filterNotification(id);
-
     try {
       const data = await axios.post(
         `${Image.url}/proccess.php`,
@@ -216,10 +226,9 @@ const Signupz = () => {
           },
         }
       );
-
       setLoadlogin(false);
-
       setNote(data?.data);
+      console.log(data.data);
     } catch (err) {
       console.log("there was an error");
     }
@@ -245,7 +254,6 @@ const Signupz = () => {
       setDrawtoupdate(data.data);
       setTitle(data?.data?.title);
       setText(data?.data?.note);
-
       console.log(data.data);
     } catch (err) {
       setLoadlogin(true);
@@ -301,7 +309,6 @@ const Signupz = () => {
           },
         }
       );
-
       setLoadlogin(false);
       setSentdelete(data.data);
     } catch (err) {
