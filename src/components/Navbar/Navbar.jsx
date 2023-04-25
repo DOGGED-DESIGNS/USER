@@ -523,19 +523,22 @@ const Navbar = () => {
             {!search && (
               <div className="mx-2 justify-content-around nav2__button">
                 <NavLink className=" text-decoration-none" to={"/home"}>
-                  <Button
+                  <IconButton
+                    sx={{
+                      color: toggle == 1 ? "red" : "",
+                      fontSize: { xs: "10px" },
+                    }}
                     size="small"
-                    variant={toggle == 1 ? "contained" : "text"}
                     onClick={() => {
                       setToggle(1);
                     }}
                     className={toggle == 1 ? "bat" : "text-black-50"}
                   >
-                    <Home fontSize="small" />
-                  </Button>
+                    <Home sx={{ fontSize: { xs: "18px" } }} />
+                  </IconButton>
                 </NavLink>
                 <NavLink className=" text-decoration-none" to={"/profile"}>
-                  <Button
+                  <IconButton
                     size="small"
                     variant={toggle == 2 ? "contained" : "text"}
                     onClick={() => {
@@ -543,20 +546,21 @@ const Navbar = () => {
                     }}
                     className={toggle == 2 ? "bat" : "text-black-50"}
                   >
-                    <AccountCircle fontSize="small" />
-                  </Button>
+                    <AccountCircle sx={{ fontSize: { xs: "18px" } }} />
+                  </IconButton>
                 </NavLink>
-                <NavLink to={"/"} className=" text-decoration-none">
-                  <Button
+                <NavLink className=" text-decoration-none">
+                  <IconButton
                     size="small"
                     variant={toggle == 3 ? "contained" : "text"}
                     onClick={() => {
                       setToggle(3);
+                      handleClickz();
                     }}
                     className={toggle == 3 ? "bat" : "text-black-50 "}
                   >
-                    <FeedbackOutlined fontSize="small" />
-                  </Button>
+                    <FeedbackOutlined sx={{ fontSize: { xs: "18px" } }} />
+                  </IconButton>
                 </NavLink>
               </div>
             )}

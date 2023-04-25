@@ -227,6 +227,7 @@ const Signupz = () => {
         }
       );
       setLoadlogin(false);
+      console.log(data?.data);
       setNote(data?.data);
       console.log(data.data);
     } catch (err) {
